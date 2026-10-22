@@ -57,7 +57,6 @@ app.post("/api/enquiries", async (req, res) => {
         id: enquiry._id,
         name: enquiry.name,
         contact: enquiry.contact,
-        interest: enquiry.interest,
         message: enquiry.message,
         createdAt: enquiry.createdAt,
       },

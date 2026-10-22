@@ -15,11 +15,6 @@ const enquirySchema = new mongoose.Schema(
       trim: true,
     },
 
-    interest: {
-      type: String,
-      default: "",
-    },
-
     message: {
       type: String,
       default: "",

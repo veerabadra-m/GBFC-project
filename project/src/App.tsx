@@ -1,4 +1,5 @@
 import { FormEvent, useState } from 'react';
+
 import {
   ArrowDown,
   ArrowUpRight,
@@ -6,7 +7,6 @@ import {
   ChevronRight,
   Clock3,
   Dumbbell,
-  Instagram,
   Mail,
   MapPin,
   Menu,
@@ -15,8 +15,9 @@ import {
   Target,
   Users,
   X,
-  Youtube,
 } from 'lucide-react';
+
+import { FaInstagram, FaWhatsapp } from 'react-icons/fa';
 
 const coachImage = '/image copy.png';
 const classImages = [
@@ -131,7 +132,27 @@ const [formStatus, setFormStatus] = useState<'idle' | 'sending' | 'success' | 'e
 
             <section className="contact-section section-wrap" id="contact"><div className="section-heading"><div><div className="section-kicker"><span>08</span> Membership enquiry</div><h2>MAKE YOUR<br /><em>MOVE.</em></h2></div><p>Business details can be added below when confirmed. The enquiry form is ready for a submission service to be connected.</p></div><div className="contact-grid"><div className="contact-details"><div><MapPin size={19} /><span>Gym address<br /><strong>Details to be added</strong></span></div><div><Clock3 size={19} /><span>Opening hours<br /><strong>Details to be added</strong></span></div><div><Mail size={19} /><span>Email address<br /><strong>Details to be added</strong></span></div><div><MessageCircle size={19} /><span>WhatsApp / phone<br /><strong>Details to be added</strong></span></div></div><form className="enquiry-form" onSubmit={submitEnquiry} noValidate><label>Full name<input name="name" required placeholder="Your name" /></label><label>Phone number or email<input name="contact" required placeholder="How can we reach you?" /></label>{showFullForm && <><label>Training interest<select name="interest" defaultValue=""><option value="" disabled>Select a program</option>{programs.map(([title]) => <option key={title}>{title}</option>)}</select></label><label>Message<textarea name="message" rows={4} placeholder="Tell us what you would like to train..."></textarea></label></>}<button type="button" className="form-expand" onClick={() => setShowFullForm(!showFullForm)}>{showFullForm ? 'Show fewer fields' : 'Add training details'} <ChevronRight size={15} /></button><button type="submit" className="button button-primary" disabled={formStatus === 'sending'}>{formStatus === 'sending' ? 'Sending...' : 'Send enquiry'} <ArrowUpRight size={17} /></button>{formStatus === 'success' && <p className="form-message success"><Check size={15} /> Thank you! Your enquiry has been sent. We will contact you soon.</p>}{formStatus === 'error' && <p className="form-message error">We couldn't send your enquiry. Please check the required fields and try again.</p>}</form></div></section>
 
-      <footer className="footer"><a className="gbfc-brand footer-brand" href="#home"><img src="/image.png" alt="GBFC" /></a><div><strong>Ground Born Fight Club &amp; Fitness Centre</strong><span>© 2026 GBFC. All rights reserved.</span></div><div className="socials"><a href="#gallery" aria-label="Instagram"><Instagram size={18} /></a><a href="#gallery" aria-label="YouTube"><Youtube size={18} /></a></div></footer>
+      <footer className="footer"><a className="gbfc-brand footer-brand" href="#home"><img src="/image.png" alt="GBFC" /></a><div><strong>Ground Born Fight Club &amp; Fitness Centre</strong><span>© 2026 GBFC. All rights reserved.</span></div><div className="socials">
+  <a
+    href="https://www.instagram.com/groundbornfightclub/"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="GBFC Instagram"
+    title="Instagram"
+  >
+    <FaInstagram size={22} />
+  </a>
+
+  <a
+    href="https://wa.me/918722782512"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Chat with GBFC on WhatsApp"
+    title="WhatsApp"
+  >
+    <FaWhatsapp size={22} />
+  </a>
+</div></footer>
     </main>
   );
 }
