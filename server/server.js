@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 import dns from "node:dns";
 import Enquiry from "./models/Enquiry.js";
+import { sendOwnerEmail } from "./emailService.js";
 
 dotenv.config();
 
@@ -27,6 +28,7 @@ app.get("/", (req, res) => {
 });
 
 // Submit a membership enquiry
+
 app.post("/api/enquiries", async (req, res) => {
   try {
     const { name, contact, interest, message } = req.body;
@@ -42,6 +44,7 @@ app.post("/api/enquiries", async (req, res) => {
       });
     }
 
+    // Save the enquiry in MongoDB first
     const enquiry = await Enquiry.create({
       name: name.trim(),
       contact: contact.trim(),
@@ -50,6 +53,26 @@ app.post("/api/enquiries", async (req, res) => {
       message:
         typeof message === "string" ? message.trim() : "",
     });
+
+    console.log(
+      "Enquiry saved. Attempting to send owner email..."
+    );
+
+    // Email failure should not undo the saved enquiry
+    try {
+      const result = await sendOwnerEmail({
+        name: enquiry.name,
+        contact: enquiry.contact,
+      });
+
+      console.log("Owner email notification sent successfully.");
+      console.log("Email message ID:", result.messageId);
+    } catch (emailError) {
+      console.error(
+        "Email notification failed:",
+        emailError.message
+      );
+    }
 
     return res.status(201).json({
       message: "Enquiry submitted successfully!",
@@ -71,6 +94,7 @@ app.post("/api/enquiries", async (req, res) => {
 });
 
 // View enquiries during local development
+
 if (process.env.NODE_ENV !== "production") {
   app.get("/api/enquiries", async (req, res) => {
     try {
@@ -88,6 +112,7 @@ if (process.env.NODE_ENV !== "production") {
     }
   });
 }
+
 
 // Start only after MongoDB connects
 async function startServer() {
