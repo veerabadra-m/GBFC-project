@@ -130,29 +130,32 @@ const [formStatus, setFormStatus] = useState<'idle' | 'sending' | 'success' | 'e
 
       <section className="membership-section" id="membership"><div className="membership-inner"><p className="eyebrow">Start your journey</p><h2>YOUR FIGHT<br /><em>STARTS HERE.</em></h2><p>Ready to take the next step in your fitness journey? Connect with GBFC to learn about training sessions and membership.</p><div className="hero-actions"><a href="#contact" className="button button-light">Enquire now <ArrowUpRight size={17} /></a><a href="#timetable" className="button button-outline light-outline">View timetable <ArrowUpRight size={16} /></a></div></div><div className="membership-mark">GBFC</div></section>
 
-            <section className="contact-section section-wrap" id="contact"><div className="section-heading"><div><div className="section-kicker"><span>08</span> Membership enquiry</div><h2>MAKE YOUR<br /><em>MOVE.</em></h2></div><p>Business details can be added below when confirmed. The enquiry form is ready for a submission service to be connected.</p></div><div className="contact-grid"><div className="contact-details"><div><MapPin size={19} /><span>Gym address<br /><strong>Details to be added</strong></span></div><div><Clock3 size={19} /><span>Opening hours<br /><strong>Details to be added</strong></span></div><div><Mail size={19} /><span>Email address<br /><strong>Details to be added</strong></span></div><div><MessageCircle size={19} /><span>WhatsApp / phone<br /><strong>Details to be added</strong></span></div></div><form className="enquiry-form" onSubmit={submitEnquiry} noValidate><label>Full name<input name="name" required placeholder="Your name" /></label><label>Phone number or email<input name="contact" required placeholder="How can we reach you?" /></label>{showFullForm && <><label>Training interest<select name="interest" defaultValue=""><option value="" disabled>Select a program</option>{programs.map(([title]) => <option key={title}>{title}</option>)}</select></label><label>Message<textarea name="message" rows={4} placeholder="Tell us what you would like to train..."></textarea></label></>}<button type="button" className="form-expand" onClick={() => setShowFullForm(!showFullForm)}>{showFullForm ? 'Show fewer fields' : 'Add training details'} <ChevronRight size={15} /></button><button type="submit" className="button button-primary" disabled={formStatus === 'sending'}>{formStatus === 'sending' ? 'Sending...' : 'Send enquiry'} <ArrowUpRight size={17} /></button>{formStatus === 'success' && <p className="form-message success"><Check size={15} /> Thank you! Your enquiry has been sent. We will contact you soon.</p>}{formStatus === 'error' && <p className="form-message error">We couldn't send your enquiry. Please check the required fields and try again.</p>}</form></div></section>
-
-      <footer className="footer"><a className="gbfc-brand footer-brand" href="#home"><img src="/image.png" alt="GBFC" /></a><div><strong>Ground Born Fight Club &amp; Fitness Centre</strong><span>© 2026 GBFC. All rights reserved.</span></div><div className="socials">
-  <a
-    href="https://www.instagram.com/groundbornfightclub/"
-    target="_blank"
-    rel="noopener noreferrer"
-    aria-label="GBFC Instagram"
-    title="Instagram"
-  >
-    <FaInstagram size={22} />
-  </a>
-
+            <section className="contact-section section-wrap" id="contact"><div className="section-heading"><div><div className="section-kicker"><span>08</span> Membership enquiry</div><h2>MAKE YOUR<br /><em>MOVE.</em></h2></div><p>Business details can be added below when confirmed. The enquiry form is ready for a submission service to be connected.</p></div><div className="contact-grid"><div className="contact-details"><div><MapPin size={19} /><span>Gym address<br /><strong>Details to be added</strong></span></div><div><Clock3 size={19} /><span>Opening hours<br /><strong>Details to be added</strong></span></div><div><Mail size={19} /><span>Email address<br /><strong>Details to be added</strong></span></div><div><MessageCircle size={19} /><span>WhatsApp / phone<br /><strong>Details to be added</strong></span></div>  
+<div className="contact-social-icons">
   <a
     href="https://wa.me/918722782512"
     target="_blank"
     rel="noopener noreferrer"
-    aria-label="Chat with GBFC on WhatsApp"
+    aria-label="Contact GBFC on WhatsApp"
     title="WhatsApp"
   >
-    <FaWhatsapp size={22} />
+    <FaWhatsapp />
   </a>
-</div></footer>
+
+  <a
+    href="https://www.instagram.com/groundbornfightclub/"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Follow GBFC on Instagram"
+    title="Instagram"
+  >
+    <FaInstagram />
+  </a>
+</div>
+  </div><form className="enquiry-form" onSubmit={submitEnquiry} noValidate><label>Full name<input name="name" required placeholder="Your name" /></label><label>Phone number or email<input name="contact" required placeholder="How can we reach you?" /></label>{showFullForm && <><label>Training interest<select name="interest" defaultValue=""><option value="" disabled>Select a program</option>{programs.map(([title]) => <option key={title}>{title}</option>)}</select></label><label>Message<textarea name="message" rows={4} placeholder="Tell us what you would like to train..."></textarea></label></>}<button type="button" className="form-expand" onClick={() => setShowFullForm(!showFullForm)}>{showFullForm ? 'Show fewer fields' : 'Add training details'} <ChevronRight size={15} /></button><button type="submit" className="button button-primary" disabled={formStatus === 'sending'}>{formStatus === 'sending' ? 'Sending...' : 'Send enquiry'} <ArrowUpRight size={17} /></button>{formStatus === 'success' && <p className="form-message success"><Check size={15} /> Thank you! Your enquiry has been sent. We will contact you soon.</p>}{formStatus === 'error' && <p className="form-message error">We couldn't send your enquiry. Please check the required fields and try again.</p>}</form></div></section>
+
+      <footer className="footer"><a className="gbfc-brand footer-brand" href="#home"><img src="/image.png" alt="GBFC" /></a><div><strong>Ground Born Fight Club &amp; Fitness Centre</strong><span>© 2026 GBFC. All rights reserved.</span></div>
+  </footer>
     </main>
   );
 }
